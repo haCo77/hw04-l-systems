@@ -6,7 +6,7 @@ abstract class Drawable {
   bufIdx: WebGLBuffer;
   bufPos: WebGLBuffer;
   bufNor: WebGLBuffer;
-  bufTranslate: WebGLBuffer;
+  bufTF: WebGLBuffer;
   bufCol: WebGLBuffer;
   bufUV: WebGLBuffer;
 
@@ -14,7 +14,7 @@ abstract class Drawable {
   posGenerated: boolean = false;
   norGenerated: boolean = false;
   colGenerated: boolean = false;
-  translateGenerated: boolean = false;
+  TFGenerated: boolean = false;
   uvGenerated: boolean = false;
 
   numInstances: number = 0; // How many instances of this Drawable the shader program should draw
@@ -22,12 +22,23 @@ abstract class Drawable {
   abstract create() : void;
 
   destory() {
-    gl.deleteBuffer(this.bufIdx);
-    gl.deleteBuffer(this.bufPos);
-    gl.deleteBuffer(this.bufNor);
-    gl.deleteBuffer(this.bufCol);
-    gl.deleteBuffer(this.bufTranslate);
-    gl.deleteBuffer(this.bufUV);
+    if(this.idxGenerated)
+      gl.deleteBuffer(this.bufIdx);
+    if(this.posGenerated)
+      gl.deleteBuffer(this.bufPos);
+    if(this.norGenerated)
+      gl.deleteBuffer(this.bufNor);
+    if(this.colGenerated)  
+      gl.deleteBuffer(this.bufCol);
+    if(this.TFGenerated)
+      gl.deleteBuffer(this.bufTF);
+    if(this.uvGenerated)
+      gl.deleteBuffer(this.bufUV);
+  }
+
+  destoryTF() {
+    if(this.TFGenerated)
+      gl.deleteBuffer(this.bufTF);
   }
 
   generateIdx() {
@@ -50,9 +61,9 @@ abstract class Drawable {
     this.bufCol = gl.createBuffer();
   }
 
-  generateTranslate() {
-    this.translateGenerated = true;
-    this.bufTranslate = gl.createBuffer();
+  generateTF() {
+    this.TFGenerated = true;
+    this.bufTF = gl.createBuffer();
   }
 
   generateUV() {
@@ -88,11 +99,11 @@ abstract class Drawable {
     return this.colGenerated;
   }
 
-  bindTranslate(): boolean {
-    if (this.translateGenerated) {
-      gl.bindBuffer(gl.ARRAY_BUFFER, this.bufTranslate);
+  bindTF(): boolean {
+    if (this.TFGenerated) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.bufTF);
     }
-    return this.translateGenerated;
+    return this.TFGenerated;
   }
 
   bindUV(): boolean {

@@ -39,9 +39,11 @@ class OpenGLRenderer {
     prog.setViewProjMatrix(viewProj);
     prog.setCameraAxes(axes);
 
-    for (let drawable of drawables) {
-      prog.draw(drawable);
-    }
+    //for (let drawable of drawables) {
+    //  prog.draw(drawable);
+    //}
+    prog.draw(drawables[0]);
+    prog.draw(drawables[1], 1);
   }
 };
 
