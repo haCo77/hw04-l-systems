@@ -18,13 +18,13 @@ use mouse to control the camara
 Implementation Details
 ----------
 - Tree Structre. The structure of the tree is generated randomly by L-System. A initial grammar is expanded iteratively based on expansion rules to a long string which contains the structure of the tree. My grammar settings are: \
-__F__: the initial grammar. F is mapped to a string with a form of "CCCB" where the value of C is chosen randomly among several possible values. This forms the trunk of the tree.  
-__C__: C doesn't expand. It serves as an auxiliary grammar to extend the branches or the trunk.
-__B__: B is expanded to three possible string, "[+CG][--CG][CG]", "[+CG][CG]", "[+CG][--CG][++CG][CG]". It's the bifurcation point.
-__G__: G is mapped to three possible string "CG" (extending one unit length), "[C[*]C[*]G*]+C[*]C[*]G*" (generating two new branches), "C[+C[*]C[*]][C[*]C[*]]-C[*]C[*]" (the end of the branch).
-__*__: leaf. No expansion.
-__+__: rotate counterclockwise.
-__-__: rotate clockwise. \
+__F__: the initial grammar. F is mapped to a string with a form of "CCCB" where the value of C is chosen randomly among several possible values. This forms the trunk of the tree. \  
+__C__: C doesn't expand. It serves as an auxiliary grammar to extend the branches or the trunk. \
+__B__: B is expanded to three possible string, "[+CG][--CG][CG]", "[+CG][CG]", "[+CG][--CG][++CG][CG]". It's the bifurcation point. \
+__G__: G is mapped to three possible string "CG" (extending one unit length), "[C[ * ]C[ * ]G*]+C[ * ]C[ * ]G*" (generating two new branches), "C[+C[ * ]C[ * ]][C[ * ]C[ * ]]-C[ * ]C[ * ]" (the end of the branch). \
+__*__: leaf. No expansion. \
+__+__: rotate counterclockwise. \
+__-__: rotate clockwise.
 
 - Base Models. The 3d models of trunk and leaf are loaded from .obj file. Their VBOs are created at the beginning including scale and deformation (the trunk.obj is just a simple cylinder and it's transformed into a capped cone). The textures are loaded at the same time and are saved in texture slot 0 and 1.
 
